@@ -1,0 +1,24 @@
+---
+import AppBar from "../components/AppBar/AppBar.astro";
+import CalculatorCard from "../components/CalculatorCard.astro";
+import Layout from "../layouts/Layout.astro";
+
+const pages = await Astro.glob("./calculators/*.mdx");
+---
+
+<Layout title="Calculators | Rinaldo Lee">
+  <AppBar />
+  <main class="max-w-md py-16 md:py-32 px-4 md:px-16">
+    <h1 class="text-5xl font-bold">Calculators</h1>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      {
+        pages.map((page) => (
+          <CalculatorCard
+            info={page.frontmatter}
+            href={page.url || "/calculators"}
+          />
+        ))
+      }
+    </div>
+  </main>
+</Layout>

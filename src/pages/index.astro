@@ -1,41 +1,52 @@
 ---
-import AppBar from '../components/AppBar/AppBar.astro';
-import AppBarProvider from '../components/AppBar/AppBarProvider.astro';
-import ProjectCard from '../components/ProjectCard.astro';
-import { projects } from '../constants/projects';
-import Layout from '../layouts/Layout.astro';
+import AppBar from "../components/AppBar/AppBar.astro";
+import AppBarProvider from "../components/AppBar/AppBarProvider.astro";
+import ProjectCard from "../components/ProjectCard.astro";
+import { projects } from "../constants/projects";
+import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout title="Rinaldo Lee">
-  <AppBarProvider>
-    <main class="snap-mandatory snap-y max-h-screen overflow-y-scroll">
-      <header class="hero hero-image min-h-screen items-start snap-start" id="top">
-        <AppBar />
-        <div class="hero-overlay bg-black bg-opacity-80"></div>
-        <div class="max-w-md py-16 md:py-32 p-2 text-shdow flex flex-col gap-5">
-          <h1 class="text-7xl font-bold text-shadow">Hello!</h1>
-          <p class="text-xl text-shadow">I am Rinaldo, a 1st year student at DLSU taking B.S. Computer Science (specialization in Software Technology).</p>
-          <p class="text-xl text-shadow">In my free time, I enjoy programming random projects and playing video games.</p>
-            <p class="text-xl text-shadow">This website will host my personal projects as well as various tools and calculators for Computer Science students</p>
-        </div>
-      </header>
-      <div class="w-full min-h-screen snap-start flex flex-row justify-center" id="projects">
-        <div class="min-w-4/5 py-16 md:py-32 px-4">
-          <h1 class="text-5xl font-bold text-shadow mb-5">My Projects</h1>
-          <div class="grid w-full grid-cols-1 md:grid-cols-3 gap-4">
-            {projects.map(project => (
-              <ProjectCard project={project} />
-            ))}
-          </div>
+  <main class="snap-mandatory snap-y max-h-screen overflow-y-scroll">
+    <header
+      class="hero hero-image min-h-screen items-start snap-start"
+      id="top"
+    >
+      <AppBar />
+      <div class="hero-overlay bg-black bg-opacity-80"></div>
+      <div class="max-w-md py-16 md:py-32 p-2 text-shdow flex flex-col gap-5">
+        <h1 class="text-5xl font-bold text-shadow">Hello!</h1>
+        <p class="text-lg text-shadow">
+          I am Rinaldo, a 1st year student at DLSU taking B.S. Computer Science
+          (specialization in Software Technology).
+        </p>
+        <p class="text-lg text-shadow">
+          In my free time, I enjoy programming random projects and playing video
+          games.
+        </p>
+        <p class="text-lg text-shadow">
+          This website will host my personal projects as well as various tools
+          and calculators for Computer Science students
+        </p>
+      </div>
+    </header>
+    <div
+      class="w-full min-h-screen snap-start flex flex-row justify-center"
+      id="projects"
+    >
+      <div class="min-w-4/5 py-16 md:py-32 px-4 md:px-16">
+        <h1 class="text-5xl font-bold text-shadow mb-5">My Projects</h1>
+        <div class="grid w-full grid-cols-1 md:grid-cols-3 gap-4">
+          {projects.map((project) => <ProjectCard project={project} />)}
         </div>
       </div>
-    </main>
-  </AppBarProvider>
+    </div>
+  </main>
 </Layout>
 
 <style>
   .hero-image {
-    background: url('/img/hero-background.jpg') no-repeat center;
+    background: url("/img/hero-background.jpg") no-repeat center;
     background-size: cover;
   }
 </style>
