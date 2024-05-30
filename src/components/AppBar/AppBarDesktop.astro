@@ -1,0 +1,17 @@
+---
+import { menu } from '../../constants/menu'
+---
+
+<nav class="w-minus-scroll flex flex-row p-8 box-border">
+  <a href="/#top"><h3 class="font-bold text-xl">Rinaldo Lee</h3></a>
+  <div class="ml-auto flex flex-row gap-8">
+    {menu.map((item) => ( 
+      <a href={item.path} target={item.external ? '_blank' : '_self'}>{item.title}</a>
+    ))}
+  </div>
+</nav>
+<style>
+  .w-minus-scroll {
+    width: calc(100vw - (100vw - 100%));
+  }
+</style>
