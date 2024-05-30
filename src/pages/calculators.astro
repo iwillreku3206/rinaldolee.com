@@ -8,8 +8,10 @@ const pages = await Astro.glob("./calculators/*.mdx");
 
 <Layout title="Calculators | Rinaldo Lee">
   <AppBar />
-  <main class="max-w-md py-16 md:py-32 px-4 md:px-16">
-    <h1 class="text-5xl font-bold">Calculators</h1>
+  <main class="w-full py-16 md:py-32 px-4 md:px-16">
+    <h1 class="text-5xl font-bold mb-5">Calculators</h1>
+    <p class="text-lg mb-10">
+      A collection of calculators that I've built for my courses in Computer Science</p> 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
       {
         pages.map((page) => (

@@ -1,0 +1,19 @@
+---
+import AppBar from "../components/AppBar/AppBar.astro";
+import Layout from "./Layout.astro";
+
+const { title, description } = Astro.props.frontmatter;
+---
+
+<Layout title={`${title} | Rinaldo Lee`}>
+  <AppBar />
+  <main class="w-full py-16 md:py-32 px-4 md:px-16">
+    <article>
+      <header>
+        <h1 class="text-5xl font-bold mb-5">{title}</h1>
+        <p class="text-lg mb-10">{description}</p>
+      </header>
+      <slot />
+    </article>
+  </main>
+</Layout>
