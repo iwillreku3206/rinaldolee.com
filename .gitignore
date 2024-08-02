@@ -28,5 +28,4 @@ pnpm-debug.log*
 
 /target
 /wasm
-/rinaldo_lee_wasm/target
 rinaldolee_com_wasm/target
