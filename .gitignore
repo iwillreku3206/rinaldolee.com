@@ -22,3 +22,11 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+
+# Added by cargo
+
+/target
+/wasm
+/rinaldo_lee_wasm/target
+rinaldolee_com_wasm/target
