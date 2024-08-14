@@ -1,0 +1,54 @@
+---
+import AppBar from '../../components/AppBar/AppBar.astro';
+import Layout from '../../layouts/Layout.astro';
+import { getCollection, getEntry } from 'astro:content';
+
+export async function getStaticPaths() {
+  return (await getCollection("blog")).map(p => {
+    return {params: {slug: p.slug} }
+  })
+}
+
+const slug = Astro.params.slug
+const post = await getEntry("blog", slug)
+const render = await post.render()
+console.log(post)
+---
+
+<Layout title={`${post}`}>
+  <AppBar />
+  <main class="flex flex-row justify-center">
+    <article class="prose max-w-lg w-full">
+      <h1 class="mb-2">{post.data.title}</h1>
+      <div class="flex flex-row gap-2">
+        <div class="flex flex-row gap-1 items-center">
+          <img src="/img/icons/person.svg" class="w-6 h-6 my-0" />
+          by {post.data.author}
+        </div>
+        <div class="flex flex-row gap-1 items-center">
+          <img src="/img/icons/calendar.svg" class="w-6 h-6 my-0" />
+          Published on {post.data.publishDate.toLocaleDateString()}
+        </div>
+        {
+          post.data.publishDate.getTime() != post.data.updateDate.getTime() &&
+          <div class="flex flex-row gap-1 items-center">
+            <img src="/img/icons/calendar.svg" class="w-6 h-6 my-0" />
+            Updated on {post.data.updateDate.toLocaleDateString()}
+          </div>
+        }
+      </div>
+      <div class="flex flex-row gap-1 items-center">
+        <img src="/img/icons/time.svg" class="w-6 h-6 my-0" />
+        {render.remarkPluginFrontmatter.minutesRead}
+      </div>
+
+      {post.data.image &&
+        <figure>
+          <img src={post.data.image.src} alt={post.data.image.alt} />
+        </figure>
+      }
+
+      <render.Content />
+    </article>
+  </main>
+</Layout>

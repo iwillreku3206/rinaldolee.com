@@ -1,11 +1,48 @@
 ---
-import AppBar from "../../components/AppBar/AppBar.astro";
-import Layout from "../../layouts/Layout.astro";
+import { getCollection } from "astro:content";
+import AppBar from "../components/AppBar/AppBar.astro";
+import Layout from "../layouts/Layout.astro";
+import BlogPostCard, { type PostInfo } from "../components/BlogPostCard.astro";
+
+const posts = (await getCollection("blog")).sort(
+  (a, b) =>
+    new Date(a.data.publishDate).getMilliseconds() -
+    new Date(b.data.publishDate).getMilliseconds(),
+);
+let page = Number(Astro.params.page || 1);
+
+// pagination formula
+const postsForPage = posts
+  .filter((p) => !p.data.draft)
+  .slice((page - 1) * 24, page * 24 - 1);
+const renderedPosts = await Promise.all(postsForPage.map((p) => p.render()));
+
+const postInfo = postsForPage.map((post, index) => {
+  return {
+    title: post.data.title,
+    summary: post.data.summary,
+    publishDate: new Date(post.data.publishDate),
+    updateDate: new Date(post.data.updateDate),
+    tags: post.data.tags,
+    image: post.data.image,
+    readingTime: renderedPosts[index].remarkPluginFrontmatter.minutesRead,
+    slug: post.slug,
+  } satisfies PostInfo;
+});
 ---
 
 <Layout title="Blog">
   <AppBar />
-  <main class="prose max-w-lg mx-auto">
-    <h1>Blog</h1>
-  </main>
+  <div class="flex flex-col items-center justify-center w-full px-16">
+    <main class="prose w-full max-w-full">
+      <h1>Blog</h1>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+        {
+          postInfo.map((post) => {
+            return <BlogPostCard postInfo={post} />;
+          })
+        }
+      </div>
+    </main>
+  </div>
 </Layout>

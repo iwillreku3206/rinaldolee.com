@@ -6,6 +6,7 @@ import wasmPack from 'vite-plugin-wasm-pack';
 import topLevelAwait from 'vite-plugin-top-level-await'
 
 import svelte from "@astrojs/svelte";
+import { remarkReadingTime } from "./remark/remark-reading-time.mjs";
 
 // https://astro.build/config
 export default defineConfig({
@@ -16,5 +17,8 @@ export default defineConfig({
     resolve: {
       extensions: ['.mjs', '.js', '.ts', '.jsx', '.tsx', '.json', '.vue', '.svelte', '.md', '.mdx', '.wasm']
     }
+  },
+  markdown: {
+    remarkPlugins: [remarkReadingTime]
   }
 });
