@@ -9,8 +9,8 @@ const blogCollection = defineCollection({
     draft: z.boolean().optional().default(true),
     title: z.string(),
     summary: z.string(),
-    publishDate: z.string().regex(isoDateStringRegex).or(z.date()),
-    updateDate: z.string().regex(isoDateStringRegex).or(z.date()),
+    publishDate: z.string().or(z.date()),
+    updateDate: z.string().or(z.date()),
     author: z.string().default('Rinaldo Lee'),
     tags: z.array(z.string()),
     image: z.object({
