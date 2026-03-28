@@ -1,0 +1,121 @@
+<canvas class="w-full h-full" id="background-canvas"></canvas>
+
+<script>
+  const canvas =
+    document.querySelector<HTMLCanvasElement>("#background-canvas");
+  let ctx = canvas?.getContext("2d");
+
+  if (!canvas || !ctx) throw Error("Unable to initialize canvas");
+
+  let width = canvas.width,
+    height = canvas.height;
+  const particles: Particle[] = [];
+
+  function resize() {
+    if (!canvas) return;
+    width = canvas.width = window.innerWidth;
+    height = canvas.height = window.innerHeight;
+    ctx = canvas?.getContext("2d");
+  }
+  window.addEventListener("resize", resize);
+  resize();
+
+  let mouseX = -999;
+  let mouseY = -999;
+
+  class Particle {
+    x: number;
+    y: number;
+
+    dx: number;
+    dy: number;
+
+    radius: number;
+
+    h: number;
+    s: number;
+    l: number;
+
+    frame: number;
+
+    constructor(h: number, s: number, l: number) {
+      this.x = Math.random() * width;
+      this.y = Math.random() * height;
+      this.dx = (Math.random() - 0.5) * 0.55;
+      this.dy = (Math.random() - 0.5) * 0.55;
+      this.radius = Math.random() * 64 + 2;
+      this.h = h;
+      this.s = s;
+      this.l = l;
+      this.frame = 0;
+    }
+
+    update() {
+      this.x += this.dx;
+      this.y += this.dy;
+
+      // Apply random factor
+      this.dx += Math.tanh(2 * (Math.random() - 0.5)) * 0.01;
+      const a = 6;
+      const b = 7;
+      this.l = (Math.sin(this.frame) + a / b) / a;
+
+      this.frame += 0.0001;
+
+      // Bounce off the edges of the screen
+      if (this.x - this.radius < 0 || this.x + this.radius > width)
+        this.dx *= -1;
+      if (this.y - this.radius < 0 || this.y + this.radius > height)
+        this.dy *= -1;
+    }
+
+    draw() {
+      if (!ctx) return;
+      ctx.filter = "blur(32px)";
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+
+      ctx.shadowBlur = 50;
+      ctx.fillStyle =
+        ctx.shadowColor = `hsl(${this.h}, ${this.s * 100}%, ${this.l * 100}%)`;
+
+      ctx.fill();
+      ctx.closePath();
+    }
+  }
+
+  const colorCount = 16;
+  for (let i = 0; i < colorCount; i++) {
+    particles.push(new Particle((i / colorCount) * 360, 0.25, 0.15));
+  }
+
+  function animate() {
+    if (!ctx) return;
+    ctx.clearRect(0, 0, width, height);
+    ctx.globalCompositeOperation = "lighter";
+
+    particles.forEach((p) => {
+      p.update();
+      p.draw();
+    });
+
+    ctx.filter = "blur(32px)";
+    ctx.beginPath();
+    ctx.arc(mouseX, mouseY, 16, 0, Math.PI * 2);
+
+    ctx.shadowBlur = 50;
+    ctx.fillStyle = ctx.shadowColor = `white`;
+
+    ctx.fill();
+    ctx.closePath();
+
+    requestAnimationFrame(animate);
+  }
+
+  window.addEventListener("mousemove", (e) => {
+    mouseX = e.pageX;
+    mouseY = e.pageY;
+  });
+
+  animate();
+</script>

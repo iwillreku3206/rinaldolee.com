@@ -37,8 +37,10 @@ pub fn ieee754(sign: bool, integer: u64, fraction: &str, double: bool) -> IEEE75
     let exponent_bits = if double { 11 } else { 8 };
     let mantissa_bits = if double { 52 } else { 23 };
 
-    let mut fraction = fraction
-    if fraction == "" fraction = "0";
+    let mut fraction = fraction;
+    if fraction.is_empty() {
+        fraction = "0";
+    }
 
     let f_bits = if double {
         format!("{}.{}", integer, fraction)

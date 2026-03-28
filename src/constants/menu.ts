@@ -5,14 +5,14 @@ export const menu = [
     external: false,
   },
   {
-    title: "Calculators",
-    path: "/calculators",
-    external: false,
-  },
-  {
     title: "Blog",
     path: "/blog",
     external: false,
+  },
+  {
+    title: "Resume",
+    path: "/Resume.pdf",
+    external: true,
   },
   {
     title: "Contact",
