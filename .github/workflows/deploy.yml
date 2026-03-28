@@ -20,6 +20,16 @@ jobs:
     steps:
       - name: Checkout your repository using git
         uses: actions/checkout@v5
+      - name: Setup Rust toolchain
+        uses: actions-rust-lang/setup-rust-toolchain@v1
+        with:
+          components: clippy, rustfmt
+      - name: Cache cargo
+        uses: Swatinem/rust-cache@v2
+      - name: Install wasm-pack
+        run: cargo install wasm-pack
+      - name: Setup WASM
+        run: wasm-pack build rinaldolee_com_wasm --target web
       - name: Install, build, and upload your site
         uses: withastro/action@v5
         # with:
