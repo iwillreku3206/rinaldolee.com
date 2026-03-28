@@ -7,19 +7,9 @@ export default {
         "1/2-screen": "50vh",
       },
       minWidth: {
-        "4/5": "80%"
-      }
-    },
-  },
-  daisyui: {
-    themes: [
-      {
-        dark: {
-          ...require("daisyui/src/theming/themes")["dark"],
-          "base-content": "#ffffff",
-        },
+        "4/5": "80%",
       },
-    ],
+    },
   },
   plugins: [require("daisyui"), require("@tailwindcss/typography")],
 };
