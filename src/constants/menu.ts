@@ -16,7 +16,7 @@ export const menu = [
   },
   {
     title: "SAS3000 Reflection",
-    path: "/sas3000 reflection",
+    path: "/sas3000 reflection.pdf",
     external: true,
   },
   {
