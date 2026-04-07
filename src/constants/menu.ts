@@ -15,6 +15,11 @@ export const menu = [
     external: true,
   },
   {
+    title: "SAS3000 Reflection",
+    path: "/sas3000 reflection",
+    external: true,
+  },
+  {
     title: "Contact",
     path: "mailto:rinaldochenglee@gmail.com",
     external: true,
