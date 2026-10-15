@@ -1,7 +1,7 @@
 ---
 import AppBar from "../../components/AppBar/AppBar.astro";
 import Layout from "../../layouts/Layout.astro";
-import { getCollection, getEntry } from "astro:content";
+import { getCollection, getEntry, render } from "astro:content";
 
 export async function getStaticPaths() {
   return (await getCollection("blog")).map((p: any) => {
@@ -24,7 +24,7 @@ if (typeof post.data.updateDate === "string") {
   post.data.updateDate = new Date(post.data.updateDate);
 }
 
-const render = await post.render();
+const rendered = await render(post);
 ---
 
 <Layout title={`${post.data.title} | Rinaldo Lee`}>
@@ -34,12 +34,17 @@ const render = await post.render();
     <meta name="description" content={post.data.summary} />
     <meta name="subject" content="Rinaldo Lee's personal blog" />
     <meta name="language" content="EN" />
-    <meta name="revised" content={post.data.updateDate.toDateString()} />
+
+    {
+      post.data.updateDate && (
+        <meta name="revised" content={post.data.updateDate.toDateString()} />
+      )
+    }
     <meta name="summary" content={post.data.summary} />
 
     <meta name="og:title" content={post.data.title} />
     <meta name="og:type" content="article" />
-    <meta name="og:url" content={`https://rinaldolee.com/blog/${post.slug}`} />
+    <meta name="og:url" content={`https://rinaldolee.com/blog/${slug}`} />
     {post.data.image && <meta name="og:image" content={post.data.image.src} />}
     <meta name="og:site_name" content="Rinaldo Lee" />
     <meta name="og:description" content={post.data.summary} />
@@ -49,7 +54,7 @@ const render = await post.render();
     />
     <meta
       name="article:modified_time"
-      content={post.data.updateDate.toISOString()}
+      content={(post.data.updateDate || post.data.publishDate).toISOString()}
     />
     <meta name="article:author" content={post.data.author} />
     {
@@ -73,18 +78,18 @@ const render = await post.render();
             Published on {post.data.publishDate.toLocaleDateString()}
           </div>
           {
-            post.data.publishDate.getTime() !=
-              post.data.updateDate.getTime() && (
+            post.data.publishDate.getTime() !==
+              post.data.updateDate?.getTime() && (
               <div class="flex flex-row gap-1 items-center">
                 <img src="/img/icons/calendar.svg" class="w-6 h-6 my-0" />
-                :wa Updated on {post.data.updateDate.toLocaleDateString()}
+                Updated on {post.data.updateDate!.toLocaleDateString()}
               </div>
             )
           }
         </div>
         <div class="flex flex-row gap-1 items-center">
           <img src="/img/icons/time.svg" class="w-6 h-6 my-0" />
-          {render.remarkPluginFrontmatter.minutesRead}
+          {rendered.remarkPluginFrontmatter.minutesRead}
         </div>
 
         {
@@ -95,7 +100,7 @@ const render = await post.render();
           )
         }
 
-        <render.Content />
+        <rendered.Content />
       </article>
     </main>
   </Fragment>

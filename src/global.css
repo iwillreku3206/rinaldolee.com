@@ -1,0 +1,12 @@
+@import "tailwindcss";
+
+@plugin "@tailwindcss/typography";
+
+@plugin "daisyui" {
+	themes: business --default;
+}
+
+@theme {
+	--min-height-1\/2-screen: 50vh;
+	--min-width-4\/5: 80%;
+}

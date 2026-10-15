@@ -1,99 +1,97 @@
 ---
-import AppBar from "../components/AppBar/AppBar.astro";
-import AppBarProvider from "../components/AppBar/AppBarProvider.astro";
 import ProjectCard from "../components/ProjectCard.astro";
 import { projects, experiences } from "../constants/projects";
 import Layout from "../layouts/Layout.astro";
-import Background from "../components/Background.astro";
 ---
 
 <Layout title="Rinaldo Lee">
-  <div class="relative">
-    <div class="absolute left-0 top-0 w-screen h-screen">
-      <Background />
-    </div>
-    <div class="absolute left-0 top-0 w-full h-full">
-      <main class="max-h-screen overflow-y-scroll">
-        <header class="hero bg-transparent items-start" id="top">
-          <AppBar staticBar={true} />
-          <div
-            class="max-w-md py-16 md:py-32 p-2 text-shdow flex flex-col gap-5"
+  <main class="max-h-screen overflow-y-scroll">
+    <header class="hero bg-transparent items-start" id="top">
+      <div class="max-w-md py-16 md:py-32 p-2 text-shdow flex flex-col gap-5">
+        <h1 class="text-5xl font-bold text-shadow">Hello!</h1>
+        <p class="text-lg text-shadow">
+          I am Rinaldo, a 4th year student at DLSU taking B.S. Computer Science
+          (specialization in Software Technology).
+        </p>
+        <p class="text-lg text-shadow">
+          In my free time, I enjoy programming random projects and playing video
+          games.
+        </p>
+        <p class="text-lg text-shadow">
+          On this website, you will find my portfolio, containing the projects
+          that I am most proud of making.
+        </p>
+        <div class="flex flex-row items-center mx-auto h-8 gap-2">
+          <!--Resume-->
+          <a
+            class="bg-base-300/25 hover:bg-base-300/90 btn btn-ghost rounded-full h-full min-h-0 px-4 flex items-center justify-center"
+            href="/Resume.pdf">My Résumé</a
           >
-            <h1 class="text-5xl font-bold text-shadow">Hello!</h1>
-            <p class="text-lg text-shadow">
-              I am Rinaldo, a 3rd year student at DLSU taking B.S. Computer
-              Science (specialization in Software Technology).
-            </p>
-            <p class="text-lg text-shadow">
-              In my free time, I enjoy programming random projects and playing
-              video games.
-            </p>
-            <p class="text-lg text-shadow">
-              On this website, you will find my portfolio, containing the projects that I am most proud of making.
-            </p>
-            <div class="flex flex-row mx-auto">
-              <!--Linkedin-->
-              <a
-                class="btn btn-ghost btn-sm"
-                href="https://www.linkedin.com/in/rinaldo-lee-b39b68334/"
-                target="_blank"
-              >
-                <img
-                  src="/img/icons/linkedin.png"
-                  alt="Linkedin"
-                  class="w-full h-full"
-                />
-              </a>
-              <!--GitHub-->
-              <a
-                class="btn btn-ghost btn-sm"
-                href="https://github.com/iwillreku3206"
-                target="_blank"
-              >
-                <img
-                  src="/img/icons/github.svg"
-                  alt="GitHub"
-                  class="w-full h-full"
-                />
-              </a>
-              <!--Email-->
-              <a
-                class="btn btn-ghost btn-sm"
-                href="mailto:rinaldochenglee@gmail.com"
-                target="_blank"
-              >
-                <img
-                  src="/img/icons/email.svg"
-                  alt="Email"
-                  class="w-full h-full svg-white"
-                />
-              </a>
-            </div>
-          </div>
-        </header>
-        <div class="w-full flex flex-row justify-center pt-24" id="projects">
-          <div class="min-w-4/5 px-4 md:px-16 h-full">
-            <h1 class="text-5xl font-bold text-shadow mb-5">My Projects</h1>
-            <div class="grid w-full grid-cols-1 md:grid-cols-3 gap-4">
-              {projects.map((project) => <ProjectCard project={project} />)}
-            </div>
-          </div>
+
+          <!--Linkedin-->
+          <a
+            class="btn p-1 m-2 btn-ghost btn-sm"
+            href="https://www.linkedin.com/in/rinaldo-lee-b39b68334/"
+            target="_blank"
+          >
+            <img
+              src="/img/icons/linkedin.png"
+              alt="Linkedin"
+              class="w-full h-full"
+            />
+          </a>
+          <!--GitHub-->
+          <a
+            class="btn p-1 m-2 btn-ghost btn-sm"
+            href="https://github.com/iwillreku3206"
+            target="_blank"
+          >
+            <img
+              src="/img/icons/github.svg"
+              alt="GitHub"
+              class="w-full h-full"
+            />
+          </a>
+          <!--Email-->
+          <a
+            class="btn p-1 m-2 btn-ghost btn-sm"
+            href="mailto:rinaldochenglee@gmail.com"
+            target="_blank"
+          >
+            <img
+              src="/img/icons/email.svg"
+              alt="Email"
+              class="w-full h-full svg-white"
+            />
+          </a>
         </div>
-        <div class="w-full flex flex-row justify-center pt-24 mb-12" id="experiences">
-          <div class="min-w-4/5 px-4 md:px-16 h-full">
-            <h1 class="text-5xl font-bold text-shadow mb-5">Experiences</h1>
-            <div class="grid w-full grid-cols-1 md:grid-cols-3 gap-4">
-              {experiences.map((project) => <ProjectCard project={project} />)}
-            </div>
-          </div>
+      </div>
+    </header>
+    <div class="w-full flex flex-row justify-center pt-24" id="projects">
+      <div class="min-w-4/5 px-4 md:px-16 h-full">
+        <h1 class="text-5xl font-bold text-shadow mb-5">My Projects</h1>
+        <div class="grid w-full grid-cols-1 md:grid-cols-3 gap-4">
+          {projects.map((project) => <ProjectCard project={project} />)}
         </div>
-      </main>
+      </div>
     </div>
-  </div>
+    <div
+      class="w-full flex flex-row justify-center pt-24 mb-12"
+      id="experiences"
+    >
+      <div class="min-w-4/5 px-4 md:px-16 h-full">
+        <h1 class="text-5xl font-bold text-shadow mb-5">Experiences</h1>
+        <div class="grid w-full grid-cols-1 md:grid-cols-3 gap-4">
+          {experiences.map((project) => <ProjectCard project={project} />)}
+        </div>
+      </div>
+    </div>
+  </main>
 </Layout>
 
 <style>
   .svg-white {
-    filter: brightness(0) saturate(100%) invert(100%) sepia(3%) saturate(12%) hue-rotate(78deg) brightness(105%) contrast(106%);
+    filter: brightness(0) saturate(100%) invert(100%) sepia(3%) saturate(12%)
+      hue-rotate(78deg) brightness(105%) contrast(106%);
   }
 </style>

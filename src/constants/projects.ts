@@ -14,11 +14,11 @@ export const projects: Project[] = [
       "A markdown preview server written in Rust to live-preview Markdown files",
     github: "https://github.com/iwillreku3206/markdown-preview-server",
   },
-  {
-    name: "nextjs-translations",
-    description: "A Next.js 13 library to handle translations",
-    github: "https://github.com/iwillreku3206/nextjs-translations",
-  },
+  // {
+  //   name: "nextjs-translations",
+  //   description: "A Next.js 13 library to handle translations",
+  //   github: "https://github.com/iwillreku3206/nextjs-translations",
+  // },
   {
     name: "PTS Website",
     description:
@@ -31,6 +31,13 @@ export const projects: Project[] = [
     description:
       "Machine Learning project and dataset that attempts to predict biological gender from images of a person's face. Uses public domain data from WikiData",
     github: "https://github.com/jrgo7/stintsy-wikidata",
+  },
+  {
+    name: "AnimoRank",
+    description:
+      "AnimoRank is an automated assessment tool designed to help students through programming practice. Needs DLSU Google account to use.",
+    website: "https://animorank.com",
+    github: "https://github.com/iwillreku3206/animorank",
   },
 ];
 
